@@ -1,0 +1,20 @@
+
+
+{
+   "extends": "../tsconfig.json",
+   "compilerOptions": {
+      "strict": true,
+      "baseUrl": "../node_modules",
+      "target": "es6",
+      "lib": ["es6", "dom", "ES2015"],
+      "types": ["cypress"],
+      "jsx": "preserve"
+   },
+   "include": [
+      "**/*.js",
+      "**/*.ts",
+      "**/*.tsx",
+      "**/**/**/*.tsx",
+      "../node_modules/cypress"
+   ]
+}
