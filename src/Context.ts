@@ -24,6 +24,7 @@ type ActionType = {
    "delete-todo": TodoId;
    "add-todo": string;
    "start-edit-todo": TodoId;
+   "complete-todo": TodoId;
    "end-edit-todo": { todoId: string; text: string };
 };
 type ActionNames = keyof ActionType;
@@ -42,6 +43,15 @@ const functionsObject: {
                text: data,
             },
          ],
+      };
+   },
+   "complete-todo": (state, data) => {
+      const { todos } = state;
+      const index = todos.findIndex((todo) => todo.id === data) as number;
+      const newTodo = { ...todos[index], completed: true };
+      return {
+         ...state,
+         todos: [...todos.slice(0, index), newTodo, ...todos.slice(index + 1)],
       };
    },
    "delete-todo": (state, data) => ({
@@ -77,10 +87,12 @@ const functionsObject: {
 export const reducer = (state: IState, action: Partial<ActionType>): IState => {
    let tempState: IState = state;
    Object.entries(action).forEach(([key, data]) => {
-      tempState = (functionsObject[key as ActionNames] as (
-         state: IState,
-         data: Partial<ActionType>[ActionNames]
-      ) => IState)(tempState, data);
+      tempState = (
+         functionsObject[key as ActionNames] as (
+            state: IState,
+            data: Partial<ActionType>[ActionNames]
+         ) => IState
+      )(tempState, data);
    });
    for (let key in action) {
    }

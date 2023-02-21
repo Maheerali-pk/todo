@@ -14,7 +14,7 @@ const App: React.FC<AppProps> = () => {
          <Grid container justify="center">
             <Box flexDirection="column" display="flex" width="50%">
                <Box alignSelf="center">
-                  <h2>Todos app</h2>
+                  <h1>Todos app</h1>
                </Box>
                <Box>
                   <Todos></Todos>

@@ -9,6 +9,7 @@ import {
    TextField,
 } from "@material-ui/core";
 import {
+   Check,
    CheckCircle,
    Delete,
    Done,
@@ -76,6 +77,16 @@ const Todo: React.FC<ITodo> = ({ active, completed, text, id }) => {
                   justifyContent="center"
                   flexWrap="wrap"
                >
+                  {!completed && (
+                     <IconButton
+                        className="check"
+                        onClick={() => dispatch({ "complete-todo": id })}
+                     >
+                        <CheckCircle
+                           style={{ color: "greenyellow" }}
+                        ></CheckCircle>
+                     </IconButton>
+                  )}
                   {active ? (
                      <IconButton
                         onClick={() =>
